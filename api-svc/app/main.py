@@ -11,8 +11,9 @@ app = FastAPI()
 """
 Setup a put request for the FastAPI application to get the collection stats
 """
-@app.get("/message")
 
+
+@app.get("/message")
 async def get_message() -> dict:
     """
     This function takes in absolutely nothing and returns a simple message response

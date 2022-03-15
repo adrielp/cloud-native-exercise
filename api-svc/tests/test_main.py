@@ -9,6 +9,7 @@ from app.main import app
 
 client = TestClient(app)
 
+
 def test_get_message():
     """
     A simple function to test the get_message api response through fastapi
