@@ -6,8 +6,7 @@ The directory structure is as follows:
 ```
 ├── Dockerfile # Contains commands to build the container image
 ├── README.md # This file containing information about the api-svc 
-├── app # This directory gets built into the image and hosts the api-svc code
-│   ├── __init__.py # Empty python __init__ file for the app
+├── app # This directory gets built into the image and hosts the api-svc code │   ├── __init__.py # Empty python __init__ file for the app
 │   └── main.py # The main program for the super simple API
 ├── build.sh # A super basic build script that builds container image
 ├── run_container.sh # A super basic run script to run the built image as a container locally
@@ -30,8 +29,7 @@ The directory structure is as follows:
 
 ### Run Locally (not in a container)
 * Navigate to the root of the [api-svc](./) directory.
-* run the `run_dev_venv.sh` script to create a virtual environment and install the python packages
-* run `source venv/bin/activate` to source the virtual environment
+* run `source run_dev_venv.sh` script to create a virtual environment and install the development python packages
 * run `uvicorn app.main:app --reload` to spin the app up locally in your terminal
 * Navigate to `localhost:8000/docs` to see what available endpoints there are
 

@@ -8,5 +8,6 @@
 python3 -m venv venv \
     && source venv/bin/activate \
     && pip install --upgrade pip \
-    && pip install -r src/requirements.txt \
-    && deactivate
+    && pip install -r src/dev-requirements.txt \
+    && deactivate \
+    && source venv/bin/activate
