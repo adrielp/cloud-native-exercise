@@ -21,10 +21,10 @@ The directory structure is as follows:
 ## Instructions for local development
 ### Prereqs
 * Ensure you have Python 3.9+ installed locally.
-** If running on MacOS you can use `brew install python@39`
-** If running on Linux you can use `{dnf,apt-get} install python3.9` or something to that effect
-** If running on Windows, choose a different OS. Just kidding, check out [Python Getting Started](https://wiki.python.org/moin/BeginnersGuide/Download)
-> When in doubt, see the [Python Getting Started](https://wiki.python.org/moin/BeginnersGuide/Download)
+    * If running on MacOS you can use `brew install python@39`
+    * If running on Linux you can use `{dnf,apt-get} install python3.9` or something to that effect
+    * If running on Windows, choose a different OS. Just kidding, check out [Python Getting Started](https://wiki.python.org/moin/BeginnersGuide/Download)
+        > When in doubt, see the [Python Getting Started](https://wiki.python.org/moin/BeginnersGuide/Download)
 * Ensure you have [Docker](https://www.docker.com/get-started) installed or another OCI compliant build tool like [Buildah](https://buildah.io)
 * Ensure you have a text editor and a terminal.
 
@@ -46,14 +46,35 @@ The directory structure is as follows:
 * Ensure your tests are in the [tests](./tests) directory.
 * Ensure your tests match the conventions set by [pytest](https://docs.pytest.org/en/7.1.x/index.html)
 * Run `python -m pytest`
-> Note here that we're using `python -m pytest` instead of just `pytest`
-> This is because we're operating in a virtual environment which causes some issues
-> with module loading when running the tests.
+    * You can also run the `source venv/bin/activate; ./run_tests_lint.sh`
+    > Note here that we're using `python -m pytest` instead of just `pytest`
+    > This is because we're operating in a virtual environment which causes some issues
+    > with module loading when running the tests.
 
 ### Run Linting and Formatting
 It's a good practice to lint and format your code. I use [autopep8](https://pypi.org/project/autopep8/) and [pylint](https://pylint.org)
 * Navigate to the root of the [api-svc](./) directory.
 * To automatically format your code using `autopep8`
-** Run `autopep8 --in-place --aggressive --aggressive --recursive`
+    * Run `autopep8 --in-place --aggressive --aggressive --recursive <files>`
 * To automatically lint your code using `pylint`
-** Run `pylint <path/to/file>`
+    * Run `pylint <path/to/file>`
+    * You can also run the `source venv/bin/activate; ./run_tests_lint.sh`
+
+## How does this meet RESTful architecture?
+This is a very simple API made very easy by FastAPI. The question then becomes,
+how does this meet RESTful architecture?
+
+The answer is `yes`, albeit loosely.
+
+The following are the architerctural constraints that this API server loosely meets:
+1. Client-server architecture
+    As a client, I interact with the API endpoint, which is hosted inside of a kubernetes cluster, where the POD is acting as the API server
+2. Statelessness
+    The API server retains no session information when it receives the API request.
+    Additionally, the API server run in kubernetes can automatically be scaled to have multiple replicas which are load balanced.
+3. Layered system
+    The client cannot tell what they're connected directly to when the API server is deployed in "production."
+    The client simply hits the API endpoint, but has no understanding if it's hitting the server directly or if it's hitting a load balancer.
+4. Uniform interface
+    The interface is conceptually separate from what a client understands. Of course, there's nothing really
+    for the client to understand under than the URI endpoint.
