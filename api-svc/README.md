@@ -44,7 +44,7 @@ The directory structure is as follows:
 * Ensure your tests are in the [tests](./tests) directory.
 * Ensure your tests match the conventions set by [pytest](https://docs.pytest.org/en/7.1.x/index.html)
 * Run `python -m pytest`
-    * You can also run the `source venv/bin/activate; ./run_tests_lint.sh`
+    * You can also run the `source venv/bin/activate; ./run_tests_lint_format.sh`
     > Note here that we're using `python -m pytest` instead of just `pytest`
     > This is because we're operating in a virtual environment which causes some issues
     > with module loading when running the tests.
@@ -53,10 +53,10 @@ The directory structure is as follows:
 It's a good practice to lint and format your code. I use [autopep8](https://pypi.org/project/autopep8/) and [pylint](https://pylint.org)
 * Navigate to the root of the [api-svc](./) directory.
 * To automatically format your code using `autopep8`
-    * Run `autopep8 --in-place --aggressive --aggressive --recursive <files>`
+    * Run `autopep8 --in-place --aggressive --aggressive --recursive <files/dirs>`
 * To automatically lint your code using `pylint`
     * Run `pylint <path/to/file>`
-    * You can also run the `source venv/bin/activate; ./run_tests_lint.sh`
+    * You can also run the `source venv/bin/activate; ./run_tests_lint_format.sh`
 
 ## How does this meet RESTful architecture?
 This is a very simple API made very easy by FastAPI. The question then becomes,
