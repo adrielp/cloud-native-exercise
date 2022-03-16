@@ -28,6 +28,7 @@ USER ${user}:${group}
 WORKDIR /micro
 
 COPY src/requirements.txt /micro/requirements.txt
+COPY src/helm_test.py /micro/helm_test.py
 
 RUN python3 -m venv $VIRTUAL_ENV \
     && . $VIRTUAL_ENV/bin/activate \
