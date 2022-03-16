@@ -9,7 +9,8 @@ from fastapi import FastAPI
 app = FastAPI()
 
 """
-Setup a put request for the FastAPI application to get the collection stats
+Use FastAPI() to setup get requests that return information based on the context
+path of the called URI.
 """
 
 
@@ -17,10 +18,21 @@ Setup a put request for the FastAPI application to get the collection stats
 async def get_message() -> dict:
     """
     This function takes in absolutely nothing and returns a simple message response
-    to the call.
+    to the caller.
     """
     message: dict = {
         "message": "Automate all the things!",
         "timestamp": datetime.now()
+    }
+    return message
+
+
+@app.get("/readiness")
+async def get_readiness() -> dict:
+    """
+    This function takes in absolutely nothing and returns a simple message.
+    """
+    message: dict = {
+        "ready": True
     }
     return message

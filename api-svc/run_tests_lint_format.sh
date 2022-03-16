@@ -5,5 +5,12 @@
 set -ex
 
 python -m pytest
+
 pylint app/main.py \
     tests/test_main.py
+
+autopep8 --in-place \
+    --aggressive \
+    --aggressive \
+    --recursive \
+    app tests

@@ -5,8 +5,3 @@
 set -ex
 
 docker build --tag fastapi-micro:1.0.0 .
-
-docker run --rm -it \
-    --name fastapi \
-    -p 8080:8080 \
-    fastapi-micro:1.0.0

@@ -32,3 +32,19 @@ def test_get_message():
     # 2022-03-15T13:07:06.699656
     reg: str = r"^\d{4}-\d{2}-\d{2}T\d{1,2}:\d{1,2}:\d{1,3}.\d+$"
     assert re.fullmatch(reg, data["timestamp"])
+
+
+def test_get_readiness():
+    """
+    A simple function to test the get_message api response through fastapi
+    The function tests the following:
+        - tests that the response status code is 200 (success)
+        - tests that the data loaded via response.json() is a dictionary
+        - tests that the message response for "ready" is true
+    """
+    response: object = client.get("/readiness")
+    assert response.status_code == 200
+    data: dict = response.json()
+    assert isinstance(data, dict)
+    assert "ready" in data
+    assert data["ready"]
