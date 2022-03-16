@@ -1,0 +1,116 @@
+# Default values for api-svc.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# -- replicate count of pods, defaulted to 3 for scalability
+replicaCount: 3
+
+# -- image information
+image:
+  # -- repository defaults to hub.docker.com using the fastapi-micro image
+  repository: fastapi-micro
+  # -- default pullPolicy is IfNotPresent
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0.0"
+
+
+namespace:
+  # -- namespace name to create on deployment: defaults to `api-svc`
+  name: "api-svc"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# -- serviceAccount setup. Defaults set here are fine for this exercise.
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # -- If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# -- default securityContext set to drop all capabilities
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# -- default http service hits port 80 at the service to port 8080 of the pod
+service:
+  # -- default type ClusterIP
+  type: ClusterIP
+  # -- nodePort specification if type: NodePort for development
+  nodePort: ""
+  # -- port for the service
+  port: 80
+  # -- port for the pod
+  targetPort: 8080
+
+# -- ingress settings
+ingress:
+  # -- whether or not to enable ingress - requires an ingress controller to be setup
+  enabled: true
+  # -- className of the ingress controller (nginx)
+  className: ""
+  # -- annotations for ingress
+  annotations:
+    # -- to be replaced eventually by className
+    kubernetes.io/ingress.class: nginx
+    # -- sets the tls-acme notation, defaults to true
+    kubernetes.io/tls-acme: "true"
+  # -- hosts to setup for ingress
+  hosts:
+    # -- default to api-svc.local for local development (requires /etc/hosts change)
+    - host: api-svc.local
+      # -- paths block for ingress
+      paths:
+        # -- default to root context path and ImplementationSpecific pathType
+        - path: /
+          pathType: ImplementationSpecific
+  # -- tls settings for secrets contains certificates
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- resources block, recommendation is to no specify default resources
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- autoscaling for pods, defaulted to false
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# -- nodeSelector block for fine grained control
+nodeSelector: {}
+
+# -- tolerations block for fine grained control
+tolerations: []
+
+# -- affinity block for fine grained control
+affinity: {}
