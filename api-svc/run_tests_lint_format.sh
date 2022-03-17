@@ -7,10 +7,11 @@ set -ex
 python -m pytest
 
 pylint app/main.py \
-    tests/test_main.py
+    tests/test_main.py \
+    src/helm_test.py
 
 autopep8 --in-place \
     --aggressive \
     --aggressive \
     --recursive \
-    app tests
+    app tests src
