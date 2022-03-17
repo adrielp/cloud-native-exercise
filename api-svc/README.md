@@ -5,8 +5,9 @@ This directory (`api-svc`) hosts the files needed to build a simple
 The directory structure is as follows:
 ```
 ├── Dockerfile # Contains commands to build the container image
-├── README.md # This file containing information about the api-svc 
-├── app # This directory gets built into the image and hosts the api-svc code │   ├── __init__.py # Empty python __init__ file for the app
+├── README.md # This file containing information about the api-svc
+├── app # This directory gets built into the image and hosts the api-svc code
+│   ├── __init__.py # Empty python __init__ file for the app
 │   └── main.py # The main program for the super simple API
 ├── build.sh # A super basic build script that builds container image
 ├── run_container.sh # A super basic run script to run the built image as a container locally
