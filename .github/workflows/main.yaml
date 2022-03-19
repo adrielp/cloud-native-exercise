@@ -1,0 +1,29 @@
+# This is the workflow for the main release branch.
+
+name: Main Build, Test, and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build-test-api-svc:
+    uses: ./.github/workflows/build-test-api-svc.yaml
+
+  build-container-image:
+    uses: ./.github/workflows/build-container-image.yaml
+    needs: build-test-api-svc
+
+  publish-container-image:
+    needs: build-container-image
+    uses: ./.github/workflows/publish-container-image.yaml
+    secrets:
+      username: ${{ secrets.DOCKER_USERNAME }}
+      usertoken: ${{ secrets.DOCKER_PASSWORD }}
+    if:
+      contains('
+        refs/heads/main
+      ', github.ref)
