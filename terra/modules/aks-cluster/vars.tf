@@ -25,5 +25,5 @@ variable "vnet_address_space" {
 variable "vm_size" {
   description = "VM size name for the provider"
   type        = string
-  nullable    = false
+  default     = "standard_l8s_v2"
 }
