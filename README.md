@@ -14,7 +14,6 @@ the application.
 - [Terraform](https://www.terraform.io) the provisioner
 - [Terragrunt](https://terragrunt.gruntwork.io) a wrapper to terraform to keep code dry
 - [Helm](https://helm.sh) to deploy the chart in kubernetes
-- [SOPS](https://github.com/mozilla/sops) the encryption tool for secrets
 - A cloud provider, I've chosen [Azure](https://azure.microsoft.com/en-us/)
 - [Docker](https://www.docker.com) to build the container image
 - [Helm Docs](https://github.com/norwoodj/helm-docs) to generated the README.md for the helm chart
@@ -66,3 +65,28 @@ read the [README.md](./api-svc/chart/api-svc/README.md)
 The [terra](./terra) directory contains configuration files to run Terragrunt
 against. See the [README.md](./terra/README.md) for more information.
 
+## Dreaming of ToDos
+There are several things I'd like to add to this functionality, and would certainly
+add in a production setting. The below is partial list :)
+1. Add a github action to call semantic-release and automatically version this monorepo
+2. Publish said version of the container image matching the semantic versioning of the repository.
+3. Add public DNS to the AKS cluster
+4. Update the values files in the helm deployment during provisioning to allow the ingress
+to route the traffic publicly.
+5. Enable TLS on the ingress router.
+6. Further cleanup and parameterize the terragrunt deployment.
+7. Build out a test suite using terratest for the modules and deployment.
+8. Add a github action that runs terratests upon PR build
+9. Add SOPS encryption to the terragrunt files for the provider secrets instead of using azure CLI secret exporting
+10. Secure all the things :) (mmm mTLS via a service mesh sounds good)
+
+## Really Helpful Resources that I leveraged/looked into (even for todos)
+- [Microsoft docs](https://docs.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-aks-applicationgateway-ingress#9-install-helm)
+- [Terraform docs (azurerm)](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#effective_outbound_ips)
+- [Terraform docs (helm)](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release)
+- [Terraform docs (azurerm service principle for automation)](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_certificate)
+- [Github actions](https://github.com/marketplace?type=actions)
+- [Terratest examples (While I was researching)](https://terratest.gruntwork.io/examples/)
+- [Terragrunt docs](https://terragrunt.gruntwork.io/docs/reference/built-in-functions/#get_repo_root)
+- [Block post about helm test after realizing the provider didn't have that functionality](https://jwenz723.medium.com/using-terraform-to-deploy-a-helm-chart-with-helm-test-execution-e2c4a5d12bbe)
+- [FastAPI docs](https://fastapi.tiangolo.com)

@@ -86,6 +86,10 @@ Using az cli, run the following:
 az account set --subscription <your sub>
 az aks get-credentials --resource-group <resource_group_name>  --name demo-aks1
 ```
+10. You can then port forward to check out the API via your localhost using the following commands:
+```
+kubectl port-forward deploy/api-svc-deployment 8080:8080 -n api-svc
+```
 
 ## Terragrunt
 Terragrunt's intent is to keep things dry, such that you get to have a singular
