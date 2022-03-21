@@ -8,11 +8,11 @@ replicaCount: 3
 # -- image information
 image:
   # -- repository defaults to hub.docker.com using the fastapi-micro image
-  repository: fastapi-micro
+  repository: adrielp/api-svc
   # -- default pullPolicy is IfNotPresent
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0.0"
+  tag: "latest"
 
 
 namespace:

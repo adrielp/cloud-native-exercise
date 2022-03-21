@@ -1,3 +1,10 @@
 venv
 __pycache__
 .pytest_cache
+*.tfstate
+*.backup
+*.bak
+.terragrunt-cache
+PERSONAL.md
+setenv.sh
+*.terraform
