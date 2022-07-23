@@ -1,6 +1,6 @@
 anyio==3.6.1
 asgiref==3.5.2
-astroid==2.9.3
+astroid==2.12.2
 attrs==21.4.0
 autopep8==1.6.0
 certifi==2021.10.8
