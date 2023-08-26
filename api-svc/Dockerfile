@@ -1,7 +1,7 @@
 ##############################################################################
 # Python FastAPI Simple Microservice Application
 ##############################################################################
-FROM python:3.10.5-slim
+FROM python:3.11.5-slim
 
 ARG user=app
 ARG group=app
